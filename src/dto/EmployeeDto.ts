@@ -1,10 +1,4 @@
-import {
-  MinLength,
-  MaxLength,
-  IsEmail,
-  IsInt,
-  validate,
-} from 'class-validator';
+import { MinLength, MaxLength, IsEmail, IsInt } from 'class-validator';
 export class EmployeeDto {
   @IsEmail()
   email: string;
@@ -21,6 +15,5 @@ export class EmployeeDto {
     this.firstName = firstName;
     this.lastName = lastName;
     this.salary = salary;
-    validate(this);
   }
 }

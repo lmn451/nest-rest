@@ -1,10 +1,4 @@
-import {
-  MinLength,
-  MaxLength,
-  IsEmail,
-  IsInt,
-  validate,
-} from 'class-validator';
+import { MinLength, MaxLength, IsEmail, IsInt } from 'class-validator';
 export class Employee {
   id: string;
   @IsEmail()
@@ -23,8 +17,5 @@ export class Employee {
     this.firstName = firstName;
     this.lastName = lastName;
     this.salary = salary;
-    validate(this).then(err => {
-      if (err) console.log(err);
-    });
   }
 }
