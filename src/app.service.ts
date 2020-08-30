@@ -13,17 +13,15 @@ export class AppService implements OnApplicationShutdown {
   }
 
   getEmployee(id: string): Employee | null {
-    return this.employees.filter(employee => employee.id === id)[0];
+    return this.employees.find(employee => employee.id === id);
   }
 
   addEmployee(employee: Employee): boolean {
-    if (this.getEmployee(employee.id)) return false;
     this.employees.push(employee);
     return true;
   }
 
   removeEmployee(id: string): boolean {
-    if (!this.getEmployee(id)) return false;
     this.employees = this.employees.filter(employee => employee.id !== id);
     return true;
   }

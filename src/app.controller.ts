@@ -30,7 +30,7 @@ export class AppController {
         `The user with the id: ${employee.id} already exists`,
         HttpStatus.BAD_REQUEST,
       );
-    return this.appService.addEmployee(employee);
+     return this.appService.addEmployee(employee) ;
   }
 
   @Get('/:id')
