@@ -22,15 +22,15 @@ export class AppController {
     return this.appService.getAll();
   }
 
-  @Post('/create')
-  addEmployee(@Body() employee: Employee): void {
+  @Post('/')
+  addEmployee(@Body() employee: Employee): HttpStatus {
     const emp = this.appService.getEmployee(employee.id);
     if (emp)
       throw new HttpException(
         `The user with the id: ${employee.id} already exists`,
         HttpStatus.BAD_REQUEST,
       );
-    throw this.appService.addEmployee(employee)
+    return this.appService.addEmployee(employee)
       ? HttpStatus.CREATED
       : HttpStatus.EXPECTATION_FAILED;
   }
@@ -47,7 +47,7 @@ export class AppController {
   }
 
   @Delete('/:id')
-  removeEmployee(@Param('id') id: string): void {
+  removeEmployee(@Param('id') id: string): HttpStatus {
     if (!id)
       throw new HttpException(
         'ID parameter is missing',
@@ -59,7 +59,7 @@ export class AppController {
         `The user with the id: ${id} does not exists`,
         HttpStatus.BAD_REQUEST,
       );
-    throw this.appService.removeEmployee(id)
+    return this.appService.removeEmployee(id)
       ? HttpStatus.OK
       : HttpStatus.BAD_REQUEST;
   }
@@ -68,7 +68,7 @@ export class AppController {
   updateEmployee(
     @Param('id') id: string,
     @Body() employee: EmployeeDto,
-  ): boolean {
+  ): HttpStatus {
     if (!id)
       throw new HttpException(
         'ID parameter is missing',
@@ -80,7 +80,7 @@ export class AppController {
         `The user with the id: ${id} does not exists`,
         HttpStatus.BAD_REQUEST,
       );
-    throw this.appService.updateEmployee(
+    return this.appService.updateEmployee(
       new Employee(
         id,
         employee.email,
